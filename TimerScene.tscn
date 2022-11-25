@@ -1,0 +1,167 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://fonts/connection_ii/ConnectionII.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/connection_ii/ConnectionII.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://TimerScene.gd" type="Script" id=3]
+[ext_resource path="res://Assets/1x/larger.png" type="Texture" id=4]
+[ext_resource path="res://Assets/confirmation_002.ogg" type="AudioStream" id=5]
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 56
+font_data = ExtResource( 2 )
+
+[node name="TimerScene" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 3 )
+
+[node name="BG" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.164706, 0.486275, 0.407843, 1 )
+
+[node name="Title" type="Label" parent="."]
+margin_right = 1024.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 1 )
+text = "Timer"
+align = 1
+valign = 1
+
+[node name="StartTimerButton" type="Button" parent="."]
+margin_left = 448.0
+margin_top = 128.0
+margin_right = 576.0
+margin_bottom = 192.0
+custom_fonts/font = SubResource( 3 )
+text = "Start"
+
+[node name="StopTimerButton" type="Button" parent="."]
+visible = false
+margin_left = 448.0
+margin_top = 128.0
+margin_right = 576.0
+margin_bottom = 192.0
+custom_fonts/font = SubResource( 3 )
+text = "Stop"
+
+[node name="Time" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = SubResource( 2 )
+
+[node name="Hours" type="LineEdit" parent="Time"]
+margin_left = 80.0
+margin_top = 128.0
+margin_right = 168.0
+margin_bottom = 192.0
+text = "0"
+
+[node name="Label" type="Label" parent="Time/Hours"]
+margin_top = -16.0
+margin_right = 104.0
+margin_bottom = 1.0
+text = "Hours"
+align = 1
+
+[node name="Minutes" type="LineEdit" parent="Time"]
+margin_left = 192.0
+margin_top = 128.0
+margin_right = 280.0
+margin_bottom = 192.0
+text = "0"
+
+[node name="Label" type="Label" parent="Time/Minutes"]
+margin_top = -16.0
+margin_right = 104.0
+margin_bottom = 1.0
+text = "Minutes"
+align = 1
+
+[node name="Seconds" type="LineEdit" parent="Time"]
+margin_left = 304.0
+margin_top = 128.0
+margin_right = 392.0
+margin_bottom = 192.0
+text = "0"
+
+[node name="Label" type="Label" parent="Time/Seconds"]
+margin_top = -16.0
+margin_right = 104.0
+margin_bottom = 1.0
+text = "Seconds"
+align = 1
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SecondTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="TimeLeft" type="Label" parent="."]
+margin_left = 72.0
+margin_top = 216.0
+margin_right = 576.0
+margin_bottom = 272.0
+align = 1
+valign = 1
+
+[node name="FullScreen" type="TextureButton" parent="."]
+margin_right = 64.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 4 )
+expand = true
+
+[node name="FullScreenPopup" type="Popup" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="FullScreenPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.164706, 0.486275, 0.407843, 1 )
+
+[node name="Label" type="Label" parent="FullScreenPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 4 )
+text = "[Time]"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="FullScreen2" type="TextureButton" parent="FullScreenPopup"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 4 )
+expand = true
+
+[node name="TimerFinished" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[connection signal="pressed" from="StartTimerButton" to="." method="_on_StartTimerButton_pressed"]
+[connection signal="pressed" from="StopTimerButton" to="." method="_on_StopTimerButton_pressed"]
+[connection signal="text_entered" from="Time/Hours" to="." method="_on_Hours_text_entered"]
+[connection signal="text_entered" from="Time/Minutes" to="." method="_on_Minutes_text_entered"]
+[connection signal="text_entered" from="Time/Seconds" to="." method="_on_Seconds_text_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="SecondTimer" to="." method="_on_SecondTimer_timeout"]
+[connection signal="pressed" from="FullScreen" to="." method="_on_FullScreen_pressed"]
+[connection signal="pressed" from="FullScreenPopup/FullScreen2" to="." method="_on_FullScreen_pressed"]

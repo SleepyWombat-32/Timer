@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/confirmation_002.ogg-ba1a1ad2f510cc63ef606f6825b63e33.oggstr"
+
+[deps]
+
+source_file="res://Assets/confirmation_002.ogg"
+dest_files=[ "res://.import/confirmation_002.ogg-ba1a1ad2f510cc63ef606f6825b63e33.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
