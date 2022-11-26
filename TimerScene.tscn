@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://fonts/connection_ii/ConnectionII.tres" type="DynamicFont" id=1]
 [ext_resource path="res://fonts/connection_ii/ConnectionII.otf" type="DynamicFontData" id=2]
@@ -19,6 +19,9 @@ default_font = SubResource( 1 )
 [sub_resource type="DynamicFont" id=4]
 size = 56
 font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=5]
+default_font = SubResource( 4 )
 
 [node name="TimerScene" type="Control"]
 anchor_right = 1.0
@@ -110,14 +113,6 @@ one_shot = true
 [node name="SecondTimer" type="Timer" parent="."]
 autostart = true
 
-[node name="TimeLeft" type="Label" parent="."]
-margin_left = 72.0
-margin_top = 216.0
-margin_right = 576.0
-margin_bottom = 272.0
-align = 1
-valign = 1
-
 [node name="FullScreen" type="TextureButton" parent="."]
 margin_right = 64.0
 margin_bottom = 64.0
@@ -127,6 +122,7 @@ texture_hover = ExtResource( 4 )
 expand = true
 
 [node name="FullScreenPopup" type="Popup" parent="."]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -140,7 +136,7 @@ color = Color( 0.164706, 0.486275, 0.407843, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/font = SubResource( 4 )
-text = "[Time]"
+text = "Timer Finished"
 align = 1
 valign = 1
 autowrap = true
@@ -153,8 +149,72 @@ texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 4 )
 expand = true
 
+[node name="TimeLeft" type="HBoxContainer" parent="FullScreenPopup"]
+margin_left = 64.0
+margin_top = 224.0
+margin_right = 960.0
+margin_bottom = 288.0
+theme = SubResource( 5 )
+custom_constants/separation = 16
+alignment = 1
+
+[node name="Hours" type="Label" parent="FullScreenPopup/TimeLeft"]
+margin_left = 432.0
+margin_top = 3.0
+margin_right = 432.0
+margin_bottom = 60.0
+align = 1
+valign = 1
+
+[node name="Minutes" type="Label" parent="FullScreenPopup/TimeLeft"]
+margin_left = 448.0
+margin_top = 3.0
+margin_right = 448.0
+margin_bottom = 60.0
+align = 1
+valign = 1
+
+[node name="Seconds" type="Label" parent="FullScreenPopup/TimeLeft"]
+margin_left = 464.0
+margin_top = 3.0
+margin_right = 464.0
+margin_bottom = 60.0
+align = 1
+valign = 1
+
 [node name="TimerFinished" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+
+[node name="TimeLeft" type="HBoxContainer" parent="."]
+margin_left = 64.0
+margin_top = 224.0
+margin_right = 576.0
+margin_bottom = 288.0
+alignment = 1
+
+[node name="Hours" type="Label" parent="TimeLeft"]
+margin_left = 252.0
+margin_top = 25.0
+margin_right = 252.0
+margin_bottom = 39.0
+align = 1
+valign = 1
+
+[node name="Minutes" type="Label" parent="TimeLeft"]
+margin_left = 256.0
+margin_top = 25.0
+margin_right = 256.0
+margin_bottom = 39.0
+align = 1
+valign = 1
+
+[node name="Seconds" type="Label" parent="TimeLeft"]
+margin_left = 260.0
+margin_top = 25.0
+margin_right = 260.0
+margin_bottom = 39.0
+align = 1
+valign = 1
 
 [connection signal="pressed" from="StartTimerButton" to="." method="_on_StartTimerButton_pressed"]
 [connection signal="pressed" from="StopTimerButton" to="." method="_on_StopTimerButton_pressed"]
