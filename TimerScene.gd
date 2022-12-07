@@ -5,19 +5,24 @@ var seconds
 
 var paused = false
 func _on_StartTimerButton_pressed():
+	# checks how long the timer is
 	hours = $Time/Hours.text as int 
 	minutes = $Time/Minutes.text as int
 	seconds = $Time/Seconds.text as int 
-
+	
+	# converts it into seconds
 	var time = (hours * 3600)\
 	 + (minutes * 60)\
 	 + (seconds)
+	# set timers wait time to the number of seconds the user defined
 	$Timer.wait_time = time
+	# start the timer (calls _on_Timer_timeout when the timer is up)
 	$Timer.start()
-	
+
 
 
 func _on_SecondTimer_timeout():
+	# updates the display every second to show the user what is happening 
 	var h = calculate_hours()
 	var m = calculate_minutes()
 	var s = calculate_seconds()
@@ -58,16 +63,15 @@ func calculate_seconds():
 	else:
 		return str(s_to_display) + " seconds"
 
-func _on_Hours_text_entered(new_text):
+func _on_Hours_text_entered(_new_text):
 	$Time/Minutes.grab_focus()
 	$Time/Minutes.caret_position = len($Time/Minutes.text)
 
-func _on_Minutes_text_entered(new_text):
+func _on_Minutes_text_entered(_new_text):
 	$Time/Seconds.grab_focus()
 	$Time/Seconds.caret_position = len($Time/Seconds.text)
-func _on_Seconds_text_entered(new_text):
-	pass
-
+func _on_Seconds_text_entered(_new_text):
+	$StartTimerButton.grab_focus()
 
 func _on_FullScreen_pressed():
 	if $FullScreenPopup.visible:

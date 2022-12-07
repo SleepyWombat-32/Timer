@@ -71,6 +71,7 @@ margin_top = 128.0
 margin_right = 168.0
 margin_bottom = 192.0
 text = "0"
+max_length = 3
 
 [node name="Label" type="Label" parent="Time/Hours"]
 margin_top = -16.0
@@ -85,6 +86,7 @@ margin_top = 128.0
 margin_right = 280.0
 margin_bottom = 192.0
 text = "0"
+max_length = 3
 
 [node name="Label" type="Label" parent="Time/Minutes"]
 margin_top = -16.0
@@ -99,6 +101,7 @@ margin_top = 128.0
 margin_right = 392.0
 margin_bottom = 192.0
 text = "0"
+max_length = 3
 
 [node name="Label" type="Label" parent="Time/Seconds"]
 margin_top = -16.0
@@ -122,9 +125,9 @@ texture_hover = ExtResource( 4 )
 expand = true
 
 [node name="FullScreenPopup" type="Popup" parent="."]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = 64.0
 mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="FullScreenPopup"]
@@ -141,14 +144,6 @@ text = "Timer Finished"
 align = 1
 valign = 1
 autowrap = true
-
-[node name="FullScreen2" type="TextureButton" parent="FullScreenPopup"]
-margin_right = 64.0
-margin_bottom = 64.0
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 4 )
-texture_hover = ExtResource( 4 )
-expand = true
 
 [node name="TimeLeft" type="HBoxContainer" parent="FullScreenPopup"]
 margin_left = 64.0
@@ -225,4 +220,3 @@ valign = 1
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="SecondTimer" to="." method="_on_SecondTimer_timeout"]
 [connection signal="pressed" from="FullScreen" to="." method="_on_FullScreen_pressed"]
-[connection signal="pressed" from="FullScreenPopup/FullScreen2" to="." method="_on_FullScreen_pressed"]
